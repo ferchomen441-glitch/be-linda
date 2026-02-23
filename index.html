@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Cumpleaños 🎂</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+background:#000;
+overflow:hidden;
+font-family:sans-serif;
+}
+
+/* Pantalla inicio */
+.intro{
+position:fixed;
+width:100%;
+height:100%;
+background:linear-gradient(135deg,#ff416c,#ff4b2b);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+color:white;
+z-index:10;
+text-align:center;
+}
+
+.intro h1{
+font-size:28px;
+}
+
+/* Slider */
+.slider{
+position:relative;
+width:100%;
+height:100vh;
+}
+
+.slide{
+position:absolute;
+width:100%;
+height:100%;
+opacity:0;
+transition:opacity 0.6s ease-in-out;
+}
+
+.slide img{
+width:100%;
+height:100%;
+object-fit:cover;
+filter:brightness(.9);
+}
+
+/* Overlay elegante */
+.overlay{
+position:absolute;
+width:100%;
+height:100%;
+background:linear-gradient(to top,rgba(0,0,0,.5),transparent);
+}
+
+/* Final */
+.final{
+position:fixed;
+width:100%;
+height:100%;
+background:linear-gradient(135deg,#ff512f,#dd2476);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+color:white;
+opacity:0;
+transition:1s;
+text-align:center;
+padding:20px;
+}
+
+.final h1{
+font-size:28px;
+margin-bottom:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="intro" id="intro">
+<h1>🎂 Feliz Cumpleaños 🎉</h1>
+<p>Toca la pantalla para comenzar</p>
+</div>
+
+<div class="slider">
+
+<!-- 19 imágenes -->
+<div class="slide"><img src="1.jpg"><div class="overlay"></div></div>
+<div class="slide"><img src="2.jpg"><div class="overlay"></div></div>
+<div class="slide"><img src="3.jpg"><div class="overlay"></div></div>
+<div class="slide"><img src="4.jpg"><div class="overlay"></div></div>
+<div class="slide"><img src="5.jpg"><div class="overlay"></div></div>
+<div class="slide"><img src="6.jpg"><div class="overlay"></div></div>
+<div class="slide"><img src="7.jpg"><div class="overlay"></div></div>
+<div class="slide"><img src="8.jpg"><div class="overlay"></div></div>
+<div class="slide"><img src="9.jpg"><div class="overlay"></div></div>
+<div class="slide"><img src="10.jpg"><div class="overlay"></div></div>
+<div class="slide"><img src="11.jpg"><div class="overlay"></div></div>
+<div class="slide"><img src="12.jpg"><div class="overlay"></div></div>
+<div class="slide"><img src="13.jpg"><div class="overlay"></div></div>
+<div class="slide"><img src="14.jpg"><div class="overlay"></div></div>
+<div class="slide"><img src="15.jpg"><div class="overlay"></div></div>
+<div class="slide"><img src="16.jpg"><div class="overlay"></div></div>
+<div class="slide"><img src="17.jpg"><div class="overlay"></div></div>
+<div class="slide"><img src="18.jpg"><div class="overlay"></div></div>
+<div class="slide"><img src="19.jpg"><div class="overlay"></div></div>
+
+</div>
+
+<div class="final" id="final">
+<h1>🎉 Que este año esté lleno de felicidad 🎂</h1>
+<p>Gracias por ser una persona tan especial 💖</p>
+</div>
+
+<audio id="musica" loop>
+<source src="mananitas.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let current=0;
+const slides=document.querySelectorAll(".slide");
+const musica=document.getElementById("musica");
+const intro=document.getElementById("intro");
+const final=document.getElementById("final");
+
+function showSlide(i){
+slides.forEach(s=>s.style.opacity=0);
+slides[i].style.opacity=1;
+}
+
+function start(){
+intro.style.display="none";
+
+musica.volume=0;
+musica.play();
+
+let fade=setInterval(()=>{
+if(musica.volume<1){
+musica.volume+=0.05;
+}else{
+clearInterval(fade);
+}
+},200);
+
+showSlide(current);
+
+let interval=setInterval(()=>{
+current++;
+if(current<slides.length){
+showSlide(current);
+}else{
+clearInterval(interval);
+setTimeout(()=>{
+final.style.opacity=1;
+},800);
+}
+},1500); // EXACTAMENTE 1.5 segundos por imagen
+}
+
+document.body.addEventListener("click",start,{once:true});
+</script>
+
+</body>
+</html>
