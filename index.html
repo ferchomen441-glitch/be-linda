@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Cumple Belinda 🎂</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    background: linear-gradient(135deg,#ff9ec4,#ffd6e7);
+    font-family: 'Segoe UI', sans-serif;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.slider{
+    width:100%;
+    max-width:400px;
+    height:90vh;
+    position:relative;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 20px 40px rgba(0,0,0,0.3);
+    background:#fff;
+}
+
+.slide{
+    position:absolute;
+    width:100%;
+    height:100%;
+    opacity:0;
+    transition:opacity 0.5s ease-in-out;
+}
+
+.slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.active{
+    opacity:1;
+}
+
+.carta{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    text-align:center;
+    font-size:18px;
+    line-height:1.5;
+    opacity:0;
+    transition:opacity 0.5s;
+}
+
+.carta.active{
+    opacity:1;
+}
+
+button{
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:#ff5fa2;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="slider" onclick="nextSlide()">
+
+    <!-- 19 IMÁGENES -->
+    <div class="slide active"><img src="1.jpg"></div>
+    <div class="slide"><img src="2.jpg"></div>
+    <div class="slide"><img src="3.jpg"></div>
+    <div class="slide"><img src="4.jpg"></div>
+    <div class="slide"><img src="5.jpg"></div>
+    <div class="slide"><img src="6.jpg"></div>
+    <div class="slide"><img src="7.jpg"></div>
+    <div class="slide"><img src="8.jpg"></div>
+    <div class="slide"><img src="9.jpg"></div>
+    <div class="slide"><img src="10.jpg"></div>
+    <div class="slide"><img src="11.jpg"></div>
+    <div class="slide"><img src="12.jpg"></div>
+    <div class="slide"><img src="13.jpg"></div>
+    <div class="slide"><img src="14.jpg"></div>
+    <div class="slide"><img src="15.jpg"></div>
+    <div class="slide"><img src="16.jpg"></div>
+    <div class="slide"><img src="17.jpg"></div>
+    <div class="slide"><img src="18.jpg"></div>
+    <div class="slide"><img src="19.jpg"></div>
+
+    <!-- CARTA FINAL -->
+    <div class="carta" id="carta">
+        💌 <br><br>
+        feliz cumple años belinda,<br><br>
+        de parte mia y de parte de todos en el grupo te deseamos un dia y muchos mas llenos de bendiciones, amor, gueros, mamados, ejem... perdon me excedi JAJAJAJA.<br><br>
+        muchos años mas de vida querida belinda.<br><br>
+        con amor y cariño,<br>
+        jack, max, mari, vania, nataly, naomi, kendy y yo fermin ❤️
+    </div>
+
+</div>
+
+<!-- MÚSICA -->
+<audio id="music" autoplay loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let slides = document.querySelectorAll(".slide");
+let carta = document.getElementById("carta");
+let index = 0;
+let total = slides.length;
+
+function showSlide(i){
+    slides.forEach(slide => slide.classList.remove("active"));
+    if(i < total){
+        slides[i].classList.add("active");
+    }else{
+        carta.classList.add("active");
+    }
+}
+
+function nextSlide(){
+    index++;
+    if(index <= total){
+        showSlide(index);
+    }
+}
+
+// automático cada 1.5 segundos
+setInterval(()=>{
+    if(index <= total){
+        nextSlide();
+    }
+},1500);
+
+// Para que la música suene en celular
+document.body.addEventListener("click", function(){
+    document.getElementById("music").play();
+});
+</script>
+
+</body>
+</html>
